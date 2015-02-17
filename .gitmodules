@@ -1,0 +1,6 @@
+[submodule "dockertest2"]
+	path = dockertest2
+	url = https://github.com/kizbitz/dockertest2
+[submodule "dockertest3"]
+	path = dockertest3
+	url = https://github.com/kizbitz/dockertest3
