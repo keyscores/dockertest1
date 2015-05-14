@@ -1,26 +1,25 @@
-FROM debian:jessie
+FROM ubuntu:14.04
+MAINTAINER Yatin Patel
 
-MAINTAINER Jerry Baker (kizbitz): 'jerry.baker@simpledove.com'
-
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get -qq update && apt-get install -qq -y \
-    apt-utils \
+# Install g++, swig and boost, required to build QuantLib
+RUN apt-get update \
+ && apt-get install -y -q \
     curl \
-    git-core \
-    locales \
-    lsb-release \
-    pwgen
+    g++ \
+    swig \
+    libboost-all-dev
 
-# locale
-ENV LANG     en_US.UTF-8
-ENV LANGUAGE en_US
+# QuantLib (with Python, PyQL)
+RUN apt-get install -y libquantlib0 libquantlib0-dev \
+  && apt-get autoremove -y \
+  && apt-get clean -y
 
-ADD locale /etc/default/locale
-ADD locale.gen /etc/locale.gen
-
-RUN locale-gen --purge en_US.UTF-8
-RUN update-locale en_US.UTF-8
-
-# bashrc
-ADD bashrc /.bashrc
+# Download and extract QuantLib-SWIG
+RUN cd /root \
+  && curl -O -L http://sourceforge.net/projects/quantlib/files/QuantLib/1.4/other%20languages/QuantLib-SWIG-1.4.tar.gz \
+  && tar -zxvf QuantLib-SWIG-1.4.tar.gz \
+  && rm QuantLib-SWIG-1.4.* \
+  && cd QuantLib-SWIG-1.4/Python \
+  && python setup.py wrap \
+  && python setup.py build \
+  && python setup.py install
