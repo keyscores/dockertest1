@@ -15,7 +15,3 @@ Instructions and more info available in the [readme](https://github.com/hakimel/
   Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
 </section>
 ```
-
----
-
-# make a change
