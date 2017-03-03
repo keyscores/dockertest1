@@ -1,2 +1,3 @@
 sut:
-  command: test2.sh
+  build: .
+  command: runtest2.sh
