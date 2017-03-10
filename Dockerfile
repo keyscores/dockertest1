@@ -1,1 +1,1 @@
-FROM aedm/minimeteor
+FROM kizbitz/minimeteor
