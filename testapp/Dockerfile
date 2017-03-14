@@ -1,3 +1,1 @@
 FROM aedm/minimeteor
-
-# testing
